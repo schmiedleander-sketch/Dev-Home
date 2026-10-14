@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+  <Product Id="*" Name="Dev Home" Language="1033" Version="1.0.0.0" Manufacturer="Microsoft Corporation" UpgradeCode="a9f24b81-6f34-4d89-9a67-c25091bf12e2">
+    <Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" Description="Dev Home Control Center for Windows" Comments="Windows Developer Control Center with widgets, environment setup, and account management." />
+
+    <MediaTemplate EmbedCab="yes" />
+
+    <Icon Id="AppIcon.ico" SourceFile="assets/app.ico" />
+    <Property Id="ARPPRODUCTICON" Value="AppIcon.ico" />
+    <Property Id="ARPHELPLINK" Value="https://github.com/microsoft/devhome" />
+
+    <Directory Id="TARGETDIR" Name="SourceDir">
+      <Directory Id="ProgramFiles64Folder">
+        <Directory Id="CompanyFolder" Name="Microsoft">
+          <Directory Id="INSTALLFOLDER" Name="DevHome">
+            <Component Id="MainExecutable" Guid="b4c815e9-4e2b-42b8-a764-5832a8208aef">
+              <File Id="DevHomeEXE" Source="DevHome.exe" KeyPath="yes">
+                <Shortcut Id="DesktopShortcut" Directory="DesktopFolder" Name="Dev Home" Description="Dev Home Developer Control Center" WorkingDirectory="INSTALLFOLDER" Icon="AppIcon.ico" Advertise="no" />
+                <Shortcut Id="StartMenuShortcut" Directory="ProgramMenuFolder" Name="Dev Home" Description="Dev Home Developer Control Center" WorkingDirectory="INSTALLFOLDER" Icon="AppIcon.ico" Advertise="no" />
+              </File>
+            </Component>
+          </Directory>
+        </Directory>
+      </Directory>
+
+      <Directory Id="DesktopFolder" Name="Desktop" />
+      <Directory Id="ProgramMenuFolder" Name="Programs" />
+    </Directory>
+
+    <Feature Id="MainFeature" Title="Dev Home Application" Level="1">
+      <ComponentRef Id="MainExecutable" />
+    </Feature>
+  </Product>
+</Wix>
